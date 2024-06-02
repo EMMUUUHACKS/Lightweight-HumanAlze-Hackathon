@@ -1,0 +1,137 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 class=" ps-4  pt-4">Find Jobs Using your Resume</h1>
+<div class=" w-50 " id="container">
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       
+    <div class="d-block ps-4  ">
+        <div class="pb-2 input-group">
+            <input
+              type="file"
+              name="pdf_files"
+              class="form-control"
+              id="pdf_files"
+              aria-describedby="inputGroupFileAddon04"
+              multiple
+              required
+              aria-label="Upload" />
+          </div>
+
+         
+          <div class="pb-2">
+            <button class="btn  btn-outline-primary" type="submit" id="inputGroupFileAddon04">Find Jobs</button>
+          </div>
+    </div>
+        
+    </form>
+</div>
+    {% if response_text %}
+        <div class="mt-2 ps-4">
+            <h5>Your Keywords</h5>
+            <p id="response-text" class="lead">{{ response_text }}</p>
+        </div>
+    {% endif %}
+
+    {% if resume_jobs %}
+{% if resume_jobs == "False" %}
+<div class="p-4">
+  <h1>No Jobs Found...</h1>
+  </div>
+{% else %}
+<div class="p-4">
+  <h1>Jobs Relevent to your Resume </h1>
+  <div class="row mb-5">
+    {% for job in resume_jobs %}
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <!-- <div class="col-md-4">
+            <img
+              class="card-img card-img-left"
+              src="{{ job.thumbnail }}"
+              alt="Card image"
+            />
+          </div> -->
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ job.title }}</h5>
+              <p class="card-text">{{ job.company_name }}</p>
+              <p class="card-text">{{ job.location }}</p>
+
+              <ul>
+                {% for ext in job.extensions %}
+                <li>{{ ext }}</li>
+                {% endfor %}
+              </ul>
+
+              <h6>Related Links:</h6>
+              <ul>
+                {% for link in job.related_links %}
+                <li>
+                  <a href="{{ link.link }}" target="_blank">{{ link.text }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+{% endif %}
+
+<div class="p-4">
+  <h1>Jobs Relevent to your interested skills </h1>
+  <div class="row mb-5">
+    {% for job in job_list %}
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <!-- <div class="col-md-4">
+            <img
+              class="card-img card-img-left"
+              src="{{ job.thumbnail }}"
+              alt="Card image"
+            />
+          </div> -->
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ job.title }}</h5>
+              <p class="card-text">{{ job.company_name }}</p>
+              <p class="card-text">{{ job.location }}</p>
+
+              <ul>
+                {% for ext in job.extensions %}
+                <li>{{ ext }}</li>
+                {% endfor %}
+              </ul>
+
+              <h6>Related Links:</h6>
+              <ul>
+                {% for link in job.related_links %}
+                <li>
+                  <a href="{{ link.link }}" target="_blank">{{ link.text }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+              <p class="card-text">
+                <small class="text-muted">Last updated 3 mins ago</small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}

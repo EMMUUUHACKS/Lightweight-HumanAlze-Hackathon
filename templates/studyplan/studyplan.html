@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="p-4">
+    {% if subject != "None" %}
+    <h2>Study Plan For <b>{{subject}}</b></h2>
+{% else %}
+    <h2>Study Plan For Roadmap</h2>
+{% endif %}
+
+    <form action="/studyplan/" method="post" class="">
+        {% csrf_token %}
+        
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="days_to_study">Days to Study:</label>
+                    <input type="text" id="days_to_study" name="days_to_study" class="form-control" placeholder="15 Days" required>
+                </div>
+            </div>
+            
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="hours_per_day">Number of Hours per Day for Studying:</label>
+                    <input type="text" id="hours_per_day" name="hours_per_day" class="form-control" placeholder="5 Hrs" required>
+                </div>
+            </div>
+      <br>
+    
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    
+    
+    <br>
+    <br>
+    {% if result %}
+    
+    <img src="{% static "roadmap.png" %}" width="1200" height="350">
+    <div class="mt-4">
+        <h2>Response:</h2>
+        <p id="response-text" class="lead">{{ result|linebreaksbr }}</p>
+    </div>
+    {% endif %}
+
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var responseTextElement = document.getElementById('response-text');
+        if (responseTextElement) {
+            // Split the response text by '**' and join with '<br>' to put each part on a new line
+            responseTextElement.innerHTML = responseTextElement.innerHTML.split('*').join('');
+            
+            // Identify links within the text and wrap them in anchor tags
+            responseTextElement.innerHTML = responseTextElement.innerHTML.replace(/(https?:\/\/[^\s]+)/g, function(match) {
+                return '<a href="' + match + '" target="_blank">' + match + '</a>';
+            });
+        }
+    });
+</script>
+{% endblock content %}

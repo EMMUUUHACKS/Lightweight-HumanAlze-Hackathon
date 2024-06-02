@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    Talk with PDF
+{% endblock title %}
+
+{% block content %}
+
+<h1 class=" ps-4  pt-4">Resume Building Assistant </h1>
+<div class=" w-50 " id="container">
+    
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+       
+    <div class="d-block ps-4  ">
+        <div class="pb-2 input-group">
+            <input
+              type="file"
+              name="pdf_files"
+              class="form-control"
+              id="pdf_files"
+              aria-describedby="inputGroupFileAddon04"
+              multiple
+              required
+              aria-label="Upload" />
+          </div>
+
+          <div class="pb-2 input-group">
+            <span class="input-group-text">Ask Question</span>
+            <textarea class="form-control" name="user_question" aria-label="With textarea" placeholder="Doubts"></textarea>
+        </div>
+          <div class="pb-2">
+            <button class="btn  btn-outline-primary" type="submit" id="inputGroupFileAddon04">Ask</button>
+          </div>
+    </div>
+        
+    </form>
+</div>
+
+
+    {% if response_text %}
+    <div class="row   p-4 mb-4">
+        <div class="col">  
+            <div class="card">
+              <div class="card-body">
+                <div class="text-center">
+                    <div id="myChart"></div>
+              <div class="text-center fw-medium pt-3 mb-2"> {{ response_text.Score }} Resume Score</div>
+                </div>
+              </div>
+              <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
+                <div class="d-flex">
+                  <div class="me-2">
+                    <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
+                  </div>
+                  <div class="d-flex flex-column">
+                    
+                    <h6 class="mb-0 mt-2">Your Resume was scored out of 100. </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="col ">
+            <div class="card">
+                <div class="card-body ">
+                    <div class="text-center">
+                        <h5 class="card-header">Answer to your Query</h5>
+
+                        <p >{{ response_text.Answer }}</p>
+                    </div>
+                    
+                  </div>
+            </div>
+            
+          </div>
+        </div>
+       
+
+
+
+
+        <div class="row p-4">
+
+
+
+            <div class="col-md-6 col-12 mb-md-0 ">
+              <div class="card">
+                <h5 class="card-header">Keywords</h5>
+                <div class="card-body">
+                  <p><b>Key skills, technologies, and relevant terms found in the resume</b></p>
+                  <!-- Connections -->
+                  <div class=" mb-2">
+                    {% for keyword in response_text.Keywords %}
+                    <div class="ps-2 pb-2 row">
+                      
+                        <p class="mb-0">{{forloop.counter}}. {{ keyword }}</p>
+                      
+                    </div>
+                    {% endfor %}
+                  </div>
+                 </div>
+                 <h5 class="card-header">Sections</h5>
+
+                <div class="card-body">
+                    <p><b>Section of your resume</b></p>
+                  
+                    
+                      <div class=" mb-3">
+                          {% for section in response_text.Sections %}
+                          <div class=" row">
+                            
+                              <p class="mb-0">{{forloop.counter}}. {{ section }}</p>
+                            
+                          </div>
+                          {% endfor %}
+                    </div>
+                 
+                  
+               
+                
+                </div>
+              </div>
+            </div>
+            
+
+
+            <div class="col-md-6 col-12">
+              <div class="card">
+                <div class="card-body">
+                    <h5 class="card-header">Improvements</h5>
+                    <p class="p-2"><b>Areas for improvement to enhance the resume</b></p>
+                    {% for improvement in response_text.Improvements %}
+                    <div class="flex-grow-1 pb-2 ps-2 row">
+                        
+                        <p class="mb-0">{{forloop.counter}}. {{ improvement }}</p>
+                         
+                    
+                    </div>
+                    {% endfor %}
+                 
+                  <!-- /Social Accounts -->
+                </div>
+              </div>
+            </div> 
+          </div>
+        
+
+
+        </div>
+          {% endif %}
+
+          <script>
+(function () {
+    let cardColor, headingColor, axisColor, shadeColor, borderColor;
+  
+    cardColor = config.colors.cardColor;
+    headingColor = config.colors.headingColor;
+    axisColor = config.colors.axisColor;
+    borderColor = config.colors.borderColor;
+  
+    // Growth Chart - Radial Bar Chart
+    // --------------------------------------------------------------------
+    const growthChartEl = document.querySelector('#myChart'),
+      growthChartOptions = {
+        series: ["{{ response_text.Score }}"],
+        labels: ['Score'],
+        chart: {
+          height: 240,
+          type: 'radialBar'
+        },
+        plotOptions: {
+          radialBar: {
+            size: 150,
+            offsetY: 10,
+            startAngle: -150,
+            endAngle: 150,
+            hollow: {
+              size: '55%'
+            },
+            track: {
+              background: cardColor,
+              strokeWidth: '100%'
+            },
+            dataLabels: {
+              name: {
+                offsetY: 15,
+                color: headingColor,
+                fontSize: '15px',
+                fontWeight: '500',
+                fontFamily: 'Public Sans'
+              },
+              value: {
+                offsetY: -25,
+                color: headingColor,
+                fontSize: '22px',
+                fontWeight: '500',
+                fontFamily: 'Public Sans'
+              }
+            }
+          }
+        },
+        colors: [config.colors.primary],
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shade: 'dark',
+            shadeIntensity: 0.5,
+            gradientToColors: [config.colors.primary],
+            inverseColors: true,
+            opacityFrom: 1,
+            opacityTo: 0.6,
+            stops: [30, 70, 100]
+          }
+        },
+        stroke: {
+          dashArray: 5
+        },
+        grid: {
+          padding: {
+            top: -35,
+            bottom: -10
+          }
+        },
+        states: {
+          hover: {
+            filter: {
+              type: 'none'
+            }
+          },
+          active: {
+            filter: {
+              type: 'none'
+            }
+          }
+        }
+      };
+    if (typeof growthChartEl !== undefined && growthChartEl !== null) {
+      const growthChart = new ApexCharts(growthChartEl, growthChartOptions);
+      growthChart.render();
+    }
+  
+  })();
+
+  
+          </script>
+{% endblock %}
+
