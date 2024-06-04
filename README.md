@@ -2,6 +2,10 @@
 
 This README provides the steps to run Tha StudyLab Django project.
 
+For [Video Demonstration](https://drive.google.com/file/d/13NWfWFfjEEKecvuOuang1BmBBYI1Iosp/view?usp=sharing) 
+
+Blog Link of Project: [Blog](https://medium.com/@emmanuelgudinho45/revolutionize-learning-with-smart-education-system-generative-ai-django-and-pwa-integration-b5024e6702e3)
+
 ## Prerequisites
 
 - Python 3.8 or higher
@@ -38,7 +42,9 @@ This README provides the steps to run Tha StudyLab Django project.
 ## Running the Project
 
 1. **Set Environment Variables**:
-    - Set up .env 
+    - Set up .env
+    - Get the Google [Gemini Api Key](https://ai.google.dev/gemini-api)
+
 
 2. **Apply Migrations**:
     - Apply the database migrations using Django's management command:
