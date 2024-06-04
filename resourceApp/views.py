@@ -61,7 +61,7 @@ def roadmap(request):
         genai.configure(api_key=(os.getenv("GOOGLE_API_KEY")))  # Set up your API key
     # Set up the model
         generation_config = {
-            "temperature": 0.9,
+            "temperature": 0.1,
             "top_p": 1,
             "top_k": 1,
             "max_output_tokens": 2048,
@@ -186,7 +186,7 @@ def studyplan(request):
         genai.configure(api_key=(os.getenv("GOOGLE_API_KEY")))  # Set up your API key
     # Set up the model
         generation_config = {
-            "temperature": 0.9,
+            "temperature": 0.1,
             "top_p": 1,
             "top_k": 1,
             "max_output_tokens": 2048,

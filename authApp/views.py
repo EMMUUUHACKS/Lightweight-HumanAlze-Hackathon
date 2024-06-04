@@ -11,9 +11,4 @@ def home(request):
     return render(request,'auth/home.html')
 
 def signup(request):
-    return render(request,'auth/signup.html')       
-
-# def logout(request):
-#     # Perform any additional logout logic here
-#     logout(request)
-#     return redirect('login') 
+    return render(request,'auth/signup.html')      

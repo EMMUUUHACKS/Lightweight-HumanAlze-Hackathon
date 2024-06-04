@@ -6,8 +6,11 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     return render(request,'home/index.html')
 
+def calendar(request):
+    return render(request,'calendar/calendar.html')
 #Video Call with mentors 
 
+@login_required
 def profile(request):
     user = request.user
     education = Education.objects.filter(user=user)

@@ -12,5 +12,5 @@ urlpatterns = [
     path("updateeducation/",views.updateeducation,name='updateeducation'),
     path("updateskills/",views.updateskills,name='updateskills'),
     path("studymaterials/",views.studymaterials,name='studymaterials'),
-    # path('skill_button_clicked/', views.skill_button_clicked, name='skill_button_clicked'),
+    path("calendar/",views.calendar,name='calendar'),
 ]

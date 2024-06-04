@@ -51,6 +51,11 @@
     <script src="{% static 'assets/js/config.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+    
+
+   {% block calendar %} {% endblock calendar %}
+
+    
     {% progressive_web_app_meta %}
   </head>
 
@@ -204,7 +209,14 @@
               </a>
              
             </li>
-           
+            <li class="menu-item">
+              <a
+                href="/calendar"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div data-i18n="Calendar">Study Schedule</div>
+              </a>
+            </li>
 
 
           
@@ -377,6 +389,25 @@
   
       <!-- Place this tag in your head or just before your close body tag. -->
       <script async defer src="https://buttons.github.io/buttons.js'"></script>
+
+
+
+
+
+
+
+    <script src="{% static "calendar/assets/js/backend-bundle.min.js" %}"></script>
+    <script src="{% static "calendar/assets/js/customizer.js" %}"></script> 
+    <script src='{% static "calendar/assets/vendor/fullcalendar/core/main.js" %}'></script>
+    <script src='{% static "calendar/assets/vendor/fullcalendar/daygrid/main.js" %}'></script>
+    <script src='{% static "calendar/assets/vendor/fullcalendar/timegrid/main.js" %}'></script>
+    <script src='{% static "calendar/assets/vendor/fullcalendar/list/main.js" %}'></script>
+    <script src='{% static "calendar/assets/vendor/fullcalendar/interaction/main.js" %}'></script>
+    <script src="{% static "calendar/assets/js/app.js" %}"></script>
+
+
+
+
     </body>
   </html>
   
