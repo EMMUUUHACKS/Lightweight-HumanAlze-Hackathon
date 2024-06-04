@@ -4,7 +4,7 @@ This README provides the steps to run Tha StudyLab Django project.
 
 ## Prerequisites
 
-- Python 3.6 or higher
+- Python 3.8 or higher
 - pip (Python package installer)
 
 ## Installation
@@ -16,7 +16,7 @@ This README provides the steps to run Tha StudyLab Django project.
         ```
     - On Windows:
         ```bash
-        py -m venv env
+        python -m venv env
         ```
 
 2. **Activate the Virtual Environment**:
