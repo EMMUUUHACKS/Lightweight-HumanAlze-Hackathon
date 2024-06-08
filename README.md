@@ -6,6 +6,9 @@ For [Video Demonstration](https://drive.google.com/file/d/13NWfWFfjEEKecvuOuang1
 
 Blog Link of Project: [Blog](https://medium.com/@emmanuelgudinho45/revolutionize-learning-with-smart-education-system-generative-ai-django-and-pwa-integration-b5024e6702e3)
 
+**Reason for these many Apps** : Creating different apps for different features in Django promotes modularity, reusability, and maintainability of the codebase.
+
+
 ## Prerequisites
 
 - Python 3.8 or higher
